@@ -3,7 +3,7 @@
 
 
 using namespace std;
-#define N 10
+
 
 void lcs(string s1,int n1,string s2,int n2){
 	int a[n1+1][n2+1];
