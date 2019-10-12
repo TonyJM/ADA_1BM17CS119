@@ -1,65 +1,60 @@
 #include <iostream>
 #include <time.h>
+
+
 using namespace std;
+
+void knapsack(){
+    int n,c,x,i,j,k;
+    cout<<"Enter no. of items : ";
+    cin>>n;
+    int w[n],v[n],r[n];
+    cout<<"Enter weights and values of items :\n";
+    for(i=0;i<n;i++)
+        cin>>w[i]>>v[i];
+    cout<<"Enter capacity : ";
+    cin>>c;
+	int a[n+1][c+1];
+	for(i=0;i<=n;i++)
+		a[i][0]=0;
+	for(j=0;j<=c;j++)
+		a[0][j]=0;
+
+	for(i=1;i<=n;i++){
+		for(j=1;j<=c;j++){
+            		x=j-w[i-1];
+			if(x>=0)
+				a[i][j]=max(a[i-1][j],v[i-1]+a[i-1][x]);
+			else
+				a[i][j]=a[i-1][j];
+		}
+	}
+
+
+
+    i=n;j=c;
+    k=0;
+    while(i>0 && j>0){
+        if(a[i-1][j]<a[i][j]){
+            r[k++]=i;
+            j-=w[i-1];
+        }
+        i--;
+    }
+
+    cout<<"\nMax Value : "<<a[n][c];
+    cout<<"\nItems : ";
+    for(i=0;i<k;i++)
+        cout<<r[i]<<"\t";
+}
 
 int main(){
 	clock_t start,end;
 	double time;
-	int n,i,j,k,d,x=0;
-    int adj[10][10]={0};
-	int indeg[10]={0};
-	cout<<"Enter no. of tasks: ";
-	cin>>n;
-    cout<<"Enter Tasks with Dependencies:\n";
-	for(i=0;i<n;i++){
-        cout<<"Task "<<i+1<<" : Enter Dependencies: ";
-        d=-1;
-        while(d!=0){
-            cin>>d;
-            if(d!=0){
-                indeg[i]++;
-                adj[d-1][i]=1;
-            }
-        }
-	}
 
-	cout<<"\nOrder of Tasks:\n";
 	start=clock();
-
-	for(i=0;i<n;i++){
-        for(j=0;j<n;j++){
-            if(indeg[j]==0){
-                cout<<j+1<<"\t";
-                indeg[j]--;
-                x++;
-                for(k=0;k<n;k++){
-                    if(adj[j][k]==1)
-                        indeg[k]--;
-                }
-            }
-        }
-	}
-	if(x<n)
-        cout<<"\nCannot Order All Tasks";
-
+    knapsack();
 	end=clock();
 	time=(double(end)-double(start))/double(CLOCKS_PER_SEC);
 	cout<<"\nTime Taken = "<<time<<"s\n";
-
-
-/* Sample Input and Output:
-
-Enter no. of tasks: 6
-Enter Tasks with Dependencies:
-Task 1 : Enter Dependencies: 6 5 0
-Task 2 : Enter Dependencies: 4 5 0
-Task 3 : Enter Dependencies: 6 0
-Task 4 : Enter Dependencies: 3 0
-Task 5 : Enter Dependencies: 0
-Task 6 : Enter Dependencies: 0
-
-Order of Tasks:
-5       6       1       3       4       2
-
-*/
 }
