@@ -21,7 +21,7 @@ void knapsack(){
 
 	for(i=1;i<=n;i++){
 		for(j=1;j<=c;j++){
-           		x=j-w[i-1];
+            x=j-w[i-1];
 			if(x>=0)
 				a[i][j]=max(a[i-1][j],v[i-1]+a[i-1][x]);
 			else
@@ -49,7 +49,7 @@ int main(){
 	clock_t start,end;
 	double time;
 	start=clock();
-   	knapsack();
+    knapsack();
 	end=clock();
 	time=(double(end)-double(start))/double(CLOCKS_PER_SEC);
 	cout<<"\nTime Taken = "<<time<<"s\n";
