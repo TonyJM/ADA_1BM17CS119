@@ -49,7 +49,7 @@ int main(){
 	clock_t start,end;
 	double time;
 	start=clock();
-    knapsack();
+   	knapsack();
 	end=clock();
 	time=(double(end)-double(start))/double(CLOCKS_PER_SEC);
 	cout<<"\nTime Taken = "<<time<<"s\n";
