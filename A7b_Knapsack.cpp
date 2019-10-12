@@ -21,7 +21,7 @@ void knapsack(){
 
 	for(i=1;i<=n;i++){
 		for(j=1;j<=c;j++){
-            x=j-w[i-1];
+           		x=j-w[i-1];
 			if(x>=0)
 				a[i][j]=max(a[i-1][j],v[i-1]+a[i-1][x]);
 			else
